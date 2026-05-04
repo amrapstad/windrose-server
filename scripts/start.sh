@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export WINEPREFIX=/root/.wine
+export WINEARCH=win64
 SERVER_DIR="/home/windrose/windrose_server"
 SAVE_DIR="$SERVER_DIR/R5/Saved/SaveProfiles/Default/RocksDB"
 
