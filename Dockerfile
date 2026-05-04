@@ -3,7 +3,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV WINEPREFIX=/home/windrose/.wine
 ENV WINEARCH=win64
 
-RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y \
+RUN dpkg --add-architecture i386 && \
+    for i in 1 2 3; do apt-get update && break || sleep 10; done && \
+    apt-get install -y --fix-missing \
     software-properties-common \
     wget curl ca-certificates \
     gnupg2 git lib32gcc-s1 \
@@ -13,7 +15,8 @@ RUN mkdir -pm755 /etc/apt/keyrings && \
     wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key && \
     wget -NP /etc/apt/sources.list.d/ \
     https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources && \
-    apt-get update && apt-get install -y --install-recommends winehq-stable \
+    for i in 1 2 3; do apt-get update && break || sleep 10; done && \
+    apt-get install -y --fix-missing --install-recommends winehq-stable \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /opt/steamcmd && \
