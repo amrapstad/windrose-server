@@ -1,7 +1,8 @@
 FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
-ENV WINEPREFIX=/home/windrose/.wine
+ENV WINEPREFIX=/root/.wine
 ENV WINEARCH=win64
+ENV DISPLAY=:0
 
 RUN dpkg --add-architecture i386 && \
     for i in 1 2 3; do apt-get update && break || sleep 10; done && \
@@ -9,6 +10,7 @@ RUN dpkg --add-architecture i386 && \
     software-properties-common \
     wget curl ca-certificates \
     gnupg2 git lib32gcc-s1 \
+    xvfb \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -pm755 /etc/apt/keyrings && \

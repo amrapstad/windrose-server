@@ -2,8 +2,13 @@
 
 export WINEPREFIX=/root/.wine
 export WINEARCH=win64
+export DISPLAY=:0
 SERVER_DIR="/home/windrose/windrose_server"
 SAVE_DIR="$SERVER_DIR/R5/Saved/SaveProfiles/Default/RocksDB"
+
+echo "Starting virtual display..."
+Xvfb :0 -screen 0 1024x768x16 &
+sleep 2
 
 echo "Checking for Windrose server updates..."
 /opt/steamcmd/steamcmd.sh \
