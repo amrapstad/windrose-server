@@ -11,6 +11,8 @@ RUN dpkg --add-architecture i386 && \
     wget curl ca-certificates \
     gnupg2 git lib32gcc-s1 \
     xvfb \
+    libvulkan1 libvulkan1:i386 \
+    mesa-vulkan-drivers mesa-vulkan-drivers:i386 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -pm755 /etc/apt/keyrings && \

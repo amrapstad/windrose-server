@@ -3,6 +3,7 @@
 export WINEPREFIX=/root/.wine
 export WINEARCH=win64
 export DISPLAY=:0
+export WINEDEBUG=err+all
 SERVER_DIR="/home/windrose/windrose_server"
 SAVE_DIR="$SERVER_DIR/R5/Saved/SaveProfiles/Default/RocksDB"
 
@@ -27,3 +28,4 @@ wineboot --init || echo "Wineboot failed, continuing anyway..."
 
 echo "Starting Windrose server..."
 wine "$SERVER_DIR/WindroseServer.exe"
+echo "Server exited with code: $?"
