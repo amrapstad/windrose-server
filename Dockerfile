@@ -22,14 +22,18 @@ RUN mkdir -pm755 /etc/apt/keyrings && \
 RUN mkdir -p /opt/steamcmd && \
     curl -fsSL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz \
     | tar -xz -C /opt/steamcmd && \
-    chmod +x /opt/steamcmd/steamcmd.sh && \
+    chmod -R 755 /opt/steamcmd && \
     ln -s /opt/steamcmd/steamcmd.sh /usr/local/bin/steamcmd
 
 RUN useradd -m windrose
-USER windrose
+
+RUN mkdir -p /home/windrose/windrose_server && \
+    chown -R windrose:windrose /home/windrose/windrose_server
+
+USER root
 WORKDIR /home/windrose
 
-COPY --chown=windrose:windrose scripts/start.sh /home/windrose/start.sh
+COPY --chown=root:root scripts/start.sh /home/windrose/start.sh
 RUN chmod +x /home/windrose/start.sh
 
 CMD ["/home/windrose/start.sh"]
