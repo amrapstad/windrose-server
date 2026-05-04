@@ -26,16 +26,6 @@ RUN mkdir -p /opt/steamcmd && \
     ln -s /opt/steamcmd/steamcmd.sh /usr/local/bin/steamcmd
 
 RUN useradd -m windrose
-
-RUN mkdir -p /home/windrose/windrose_server && \
-    /opt/steamcmd/steamcmd.sh \
-    +@sSteamCmdForcePlatformType windows \
-    +force_install_dir /home/windrose/windrose_server \
-    +login anonymous \
-    +app_update 4129620 validate \
-    +quit && \
-    chown -R windrose:windrose /home/windrose/windrose_server
-
 USER windrose
 WORKDIR /home/windrose
 
